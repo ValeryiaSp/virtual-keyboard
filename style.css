@@ -1,23 +1,57 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 .textarea {
   width: 60%;
   border: 2px solid lightblue;
-  position: absolute;
+  margin: 0 auto;
+  display: block;
 };
 
 .keyboard {
+  display: block;
   width: 60%;
-  position: absolute;
+  margin-left: 0 auto;
+  text-align: center;
+  background-color: blue; 
+  border: 1px solid darkcyan;
 };
 
-.key {
+.keyboard__key {
   width: 7%;
   color:darkslateblue;
+  font-size: 1rem;
   background-color: lightblue;
   border: 1px solid darkorchid;
+  border-radius: 2%;
+  margin: 2px;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.active {
+.keyboard__key:active {
   background-color: darkslateblue;
   color: lightblue;
   border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.keyboard__key--functionalKey {
+  color: black;
+  background-color: aqua;
+}
+
+.keyboard__key--bigger {
+  width: 14%;
+}
+
+.keyboard__key--spaceKey{
+  width: 45%;
 }
