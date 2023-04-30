@@ -1,0 +1,23 @@
+.textarea {
+  width: 60%;
+  border: 2px solid lightblue;
+  position: absolute;
+};
+
+.keyboard {
+  width: 60%;
+  position: absolute;
+};
+
+.key {
+  width: 7%;
+  color:darkslateblue;
+  background-color: lightblue;
+  border: 1px solid darkorchid;
+}
+
+.active {
+  background-color: darkslateblue;
+  color: lightblue;
+  border-radius: 50%;
+}
