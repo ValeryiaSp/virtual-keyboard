@@ -1,0 +1,129 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.textarea {
+  width: 60%;
+  border: 2px solid lightblue;
+  margin: 6% auto 2%;
+  display: block;
+}
+
+.keyboard {
+  /* display: block; */
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgb(134, 134, 187); 
+  border: 1px solid darkcyan;
+  border-radius: 1%;
+}
+
+.mainWrapper, .altWrapper {
+  display: none;
+}
+
+.main .mainWrapper{
+  display: block;
+}
+
+
+.keyboard__key .caseDown, .keyboard__key .caseUp, .keyboard__key .caps, .keyboard__key .shiftCaps {
+  display: none;
+  user-select: none;
+}
+
+.keyboard:not(.caseUp, .caps, .shiftCaps) .caseDown {
+  display: block;
+}
+
+.keyboard.caseUp .caseUp {
+  display: block;
+}
+
+.keyboard.caps .caps {
+  display: block;
+}
+
+.keyboard.shiftCaps .shiftCaps {
+  display: block;
+}
+
+.alt .altWrapper{
+  display: block;
+}
+
+.keyboard__key .caseDownAlt, .keyboard__key .caseUpAlt, .keyboard__key .capsAlt, .keyboard__key .shiftCapsAlt {
+  display: none;
+  user-select: none;
+}
+
+.keyboard:not(.caseUpAlt, .capsAlt, .shiftCapsAlt) .caseDownAlt {
+  display: block;
+}
+
+.keyboard.caseUpAlt .caseUpAlt {
+  display: block;
+}
+
+.keyboard.capsAlt .capsAlt {
+  display: block;
+}
+
+.keyboard.shiftCapsAlt .shiftCapsAlt {
+  display: block;
+}
+
+.keyboard__row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.keyboard__key {
+  flex-grow: 1;
+  color:darkslateblue;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: lightblue;
+  border: 1px solid darkorchid;
+  border-radius: 10%;
+  margin: 3px;
+  padding: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard__key--pressed {
+  background-color: rgb(108, 93, 206);
+  color: lightblue;
+  border-radius: 30%;
+  transition: all 0.1s ease-in-out;
+}
+
+.keyboard__key--functionalKey {
+  color: black;
+  background-color: rgb(34, 88, 88);
+}
+
+.keyboard__key--bigger {
+  flex-grow: 2;
+}
+
+.keyboard__key--spaceKey{
+  width: 45%;
+}
+
+.keysShortcut, .typeOfSystem {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 15px 0;
+  display: table;
+}
