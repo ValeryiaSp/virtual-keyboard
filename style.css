@@ -17,7 +17,7 @@ html, body {
   width: 60%;
   margin: 0 auto;
   text-align: center;
-  background-color: blue; 
+  background-color: rgb(134, 134, 187); 
   border: 1px solid darkcyan;
   border-radius: 1%;
 }
@@ -100,19 +100,19 @@ html, body {
 }
 
 .keyboard__key--pressed {
-  background-color: rgb(115, 101, 202);
+  background-color: rgb(108, 93, 206);
   color: lightblue;
   border-radius: 30%;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .keyboard__key--functionalKey {
   color: black;
-  background-color: aqua;
+  background-color: rgb(34, 88, 88);
 }
 
 .keyboard__key--bigger {
-  width: 14%;
+  flex-grow: 2;
 }
 
 .keyboard__key--spaceKey{

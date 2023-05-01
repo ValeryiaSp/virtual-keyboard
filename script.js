@@ -580,15 +580,21 @@ function prepareKeyboardRow(row) {
     const keyEl = document.createElement('div');
     keyEl.classList.add('keyboard__key');
 
-    
-    if(item.isFunctional) {
-     keyEl.classList.add('keyboard__key--functionalKey')
+    if (item.isFunctional) {
+      keyEl.classList.add('keyboard__key--functionalKey');
     }
 
-   /* if(['ShiftRight', 'ShiftLeft','CapsLock','Backspase'].includes(item.eventCode)) {
-       keyEl.setAttribute("flex-grow", "2")
-   } */
-    
+    if (
+      ['ShiftRight', 'ShiftLeft', 'CapsLock', 'Backspase'].includes(
+        item.eventCode
+      )
+    ) {
+      keyEl.classList.add('keyboard__key--bigger');
+    }
+
+    if (item.eventCode === 'Space') {
+      keyEl.classList.add('keyboard__key--spaceKey');
+    }
 
     keyEl.setAttribute('data-code', item.eventCode);
 
@@ -650,7 +656,7 @@ function prepareKeyboardRow(row) {
     altWrapper.appendChild(altShiftCaps);
 
     keyEl.appendChild(mainWrapper);
-    keyEl.appendChild(altWrapper)
+    keyEl.appendChild(altWrapper);
     rowEl.appendChild(keyEl);
   });
 
@@ -686,7 +692,9 @@ function handleLanguageSwitch(event) {
 }
 
 function keyEventHandler(event) {
-  
+  // const inputText = document.querySelector('textarea');
+  // inputText = event.key;
+
   if (event.repeat) {
     return;
   }
@@ -811,18 +819,18 @@ function renderKeyboard() {
 function systemExplanation() {
   const typeOfSystem = document.createElement('div');
   typeOfSystem.className = 'typeOfSystem';
-  typeOfSystem.innerText = "Клавиатура создана в операционной системе Windows"
+  typeOfSystem.innerText = 'Клавиатура создана в операционной системе Windows';
   document.body.appendChild(typeOfSystem);
 }
 
-function functionalityExplanation() { 
+function functionalityExplanation() {
   const langKeysShortcut = document.createElement('div');
   langKeysShortcut.className = 'keysShortcut';
-  langKeysShortcut.innerText = "Для переключения языка комбинация: shift + alt"
+  langKeysShortcut.innerText = 'Для переключения языка комбинация: shift + alt';
   document.body.appendChild(langKeysShortcut);
 }
 
 renderTextArea();
 renderKeyboard();
-systemExplanation ();
+systemExplanation();
 functionalityExplanation();
