@@ -1,8 +1,8 @@
 let arrOfKeys = [
   [
     { "eventCode": "Backquote", "dataKey": '192', "value": '`' },
-    { "eventCode": "Digit1", "dataKey": '49', "value": '1' },
-    { "eventCode": "Digit2", "dataKey": '50', "value": '2' },
+    { "eventCode": "Digit1", "keyCode": '49', "value": '1' },
+    { "eventCode": "Digit2", "keyCode": '50', "value": '2' },
     { "eventCode": "Digit3", "dataKey": '51', "value": '3' },
     { "eventCode": "Digit4", "dataKey": '52', "value": '4' },
     { "eventCode": "Digit5", "dataKey": '53', "value": '5' },
@@ -32,10 +32,29 @@ let arrOfKeys = [
     { "eventCode": "BracketRight", "dataKey": '192', "value": '\\' },
     { "eventCode": "Backslash", "dataKey": '192', "value": 'Del' },
   ],
-  [],
+  [
+    { "eventCode": "CapsLock", "value": 'CapsLk', "isFunctional": 'true' },
+    { "eventCode": "KeyA", "value": 'a' },
+    { "eventCode": "KeyS", "value": 's' },
+    { "eventCode": "KeyD", "value": 'd' },
+    { "eventCode": "KeyF", "value": 'f' },
+    { "eventCode": "KeyG", "value": 'g' },
+    { "eventCode": "KeyH", "value": 'h' },
+    { "eventCode": "KeyJ", "value": 'j' },
+    { "eventCode": "KeyK", "value": 'k' },
+    { "eventCode": "KeyL", "value": 'l' },
+    { "eventCode": "Semicolon", "value": ';' },
+    { "eventCode": "Quote", "value": '\'' },
+    { "eventCode": "Enter",  "value": 'Enter', "isFunctional": 'true'},
+  ],
   [],
   [],
 ];
+
+const FIRST_LANG_SWITCH_KEY_CODE = 49;
+const SECOND_LANG_SWITCH_KEY_CODE = 50;
+
+
 
 function renderTextArea() {
   const inputField = document.createElement("textarea");
@@ -59,6 +78,10 @@ function prepareKeyboardRow(row) {
 
     keyEl.innerText = item.value;
     keyEl.setAttribute("data-code", item.eventCode);
+
+    if(item.keyCode) {
+      keyEl.setAttribute("data-keyCode", item.keyCode);
+    }
     keyEl.addEventListener('mousedown', event => keyboardKeyClickHandler(event));
     keyEl.addEventListener('mouseup', event => keyboardKeyClickHandler(event))
 
@@ -66,6 +89,20 @@ function prepareKeyboardRow(row) {
   })
 
   return rowEl;
+}
+
+function handleLanguageSwitch(event) {
+  if(event.type !== 'keyup' || ![FIRST_LANG_SWITCH_KEY_CODE, SECOND_LANG_SWITCH_KEY_CODE].includes(event.keyCode)) {
+    return
+    
+  }
+  console.log(event)
+  const targetKeyCode = event.keyCode === FIRST_LANG_SWITCH_KEY_CODE ? SECOND_LANG_SWITCH_KEY_CODE : FIRST_LANG_SWITCH_KEY_CODE;
+  const targetKeyEl = document.querySelector(`div.keyboard__key--pressed[data-keyCode="${targetKeyCode}"]`)
+
+  if(targetKeyEl){
+    console.log('Language')
+  }
 }
 
 function keyEventHandler(event) {
@@ -77,6 +114,8 @@ function keyEventHandler(event) {
   if (targetEl) {
     targetEl.classList.toggle('keyboard__key--pressed')
   }
+
+  handleLanguageSwitch(event)
 }
 
 function renderKeyboard() {
