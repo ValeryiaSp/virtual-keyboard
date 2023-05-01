@@ -79,7 +79,6 @@ const FIRST_LANG_SWITCH_KEY_CODE = 16;
 const SECOND_LANG_SWITCH_KEY_CODE = 18;
 
 
-
 function renderTextArea() {
   const inputField = document.createElement("textarea");
   inputField.className = "textarea";
@@ -100,7 +99,7 @@ function prepareKeyboardRow(row) {
     const keyEl = document.createElement("div");
     keyEl.classList.add("keyboard__key");
 
-    keyEl.innerText = item.value;
+    
     keyEl.setAttribute("data-code", item.eventCode);
 
     if(item.keyCode) {
@@ -109,6 +108,37 @@ function prepareKeyboardRow(row) {
     keyEl.addEventListener('mousedown', event => keyboardKeyClickHandler(event));
     keyEl.addEventListener('mouseup', event => keyboardKeyClickHandler(event))
 
+    const mainWrapper = document.createElement('span');
+    mainWrapper.classList.add('mainWrapper');
+
+    const  mainCaseDown= document.createElement('span');
+    mainCaseDown.classList.add('caseDown');
+    mainCaseDown.innerText = item.isFunctional ? item.value : item.caseDown;
+    mainWrapper.appendChild(mainCaseDown);
+
+    const mainCaseUp = document.createElement('span');
+    mainCaseUp.classList.add('caseUp');
+    mainCaseUp.innerText = item.isFunctional ? item.value : item.caseUp;
+    mainWrapper.appendChild(mainCaseUp);
+
+    const mainCaps = document.createElement('span');
+    mainCaps.classList.add('caps');
+    mainCaps.innerText = item.isFunctional ? item.value : item.caps;
+    mainWrapper.appendChild(mainCaps);
+
+    const mainShiftCaps = document.createElement('span');
+    mainShiftCaps.classList.add('shiftCaps');
+    mainShiftCaps.innerText = item.isFunctional ? item.value : item.shiftCaps;
+    mainWrapper.appendChild(mainShiftCaps);
+
+
+    const altWrapper = document.createElement('span');
+    altWrapper.classList.add('altWrapper');
+    const  AltCaseDowm= document.createElement('span');
+    const AltCaseUp = document.createElement('span');
+    const AltCaps = document.createElement('span');
+    const AltShiftCaps = document.createElement('span');
+    keyEl.appendChild(mainWrapper)
     rowEl.appendChild(keyEl);
   })
 
@@ -120,18 +150,36 @@ function handleLanguageSwitch(event) {
     return
     
   }
+
+
   console.log(event)
   const targetKeyCode = event.keyCode === FIRST_LANG_SWITCH_KEY_CODE ? SECOND_LANG_SWITCH_KEY_CODE : FIRST_LANG_SWITCH_KEY_CODE;
   const targetKeyEl = document.querySelector(`div.keyboard__key--pressed[data-keyCode="${targetKeyCode}"]`)
 
   if(targetKeyEl){
-    console.log('Language')
+    const currentLang = localStorage.getItem('lang');
+    const nextLang = currentLang === "main" ? "alt" : "main";
+    localStorage.setItem('lang' , nextLang);
+
+    const keyboardEl = document.querySelector('div.keyboard');
+    keyboardEl.classList.replace(currentLang, nextLang);
+    console.log('Language', currentLang, nextLang)
   }
 }
 
 function keyEventHandler(event) {
   if (event.repeat) {
     return
+  }
+  
+  const keyboardEl = document.querySelector('.keyboard');
+  console.log(event);
+  if(event.keyCode === 20 && event.type === 'keydown') {
+    keyboardEl.classList.toggle('caps')
+  }
+
+  if(event.keyCode === 16) {
+    keyboardEl.classList.toggle('caseUp')
   }
 
   const targetEl = document.querySelector(`div[data-code="${event.code}"]`);
@@ -144,7 +192,13 @@ function keyEventHandler(event) {
 
 function renderKeyboard() {
   const keyboardEl = document.createElement("div");
-  keyboardEl.className = "keyboard";
+  let currentLang = localStorage.getItem('lang');
+  if(!currentLang) {
+    localStorage.setItem('lang', 'main');
+    currentLang = 'main'
+  }
+  const keyboardClasses = ['keyboard', currentLang]
+  keyboardEl.classList.add(...keyboardClasses);
 
 
   arrOfKeys.forEach(row => {

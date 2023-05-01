@@ -22,6 +22,38 @@ html, body {
   border-radius: 1%;
 }
 
+.mainWrapper, .altWrapper {
+  display: none;
+}
+
+.main .mainWrapper{
+  display: block;
+}
+
+.alt .altWrapper{
+  display: block;
+}
+
+.keyboard__key .caseDown, .keyboard__key .caseUp, .keyboard__key .caps, .keyboard__key .shiftCaps {
+  display: none;
+}
+
+.keyboard:not(.caseUp, .caps, .shiftCaps) .caseDown {
+  display: block;
+}
+
+.keyboard.caseUp .caseUp {
+  display: block;
+}
+
+.keyboard.caps .caps {
+  display: block;
+}
+
+.keyboard.shiftCaps .shiftCaps {
+  display: block;
+}
+
 .keyboard__row {
   display: flex;
   justify-content: space-between;
