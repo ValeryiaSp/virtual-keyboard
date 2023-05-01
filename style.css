@@ -33,6 +33,7 @@ html, body {
 
 .keyboard__key .caseDown, .keyboard__key .caseUp, .keyboard__key .caps, .keyboard__key .shiftCaps {
   display: none;
+  user-select: none;
 }
 
 .keyboard:not(.caseUp, .caps, .shiftCaps) .caseDown {
@@ -57,6 +58,7 @@ html, body {
 
 .keyboard__key .caseDownAlt, .keyboard__key .caseUpAlt, .keyboard__key .capsAlt, .keyboard__key .shiftCapsAlt {
   display: none;
+  user-select: none;
 }
 
 .keyboard:not(.caseUpAlt, .capsAlt, .shiftCapsAlt) .caseDownAlt {
@@ -89,7 +91,7 @@ html, body {
   background-color: lightblue;
   border: 1px solid darkorchid;
   border-radius: 10%;
-  margin: 2px;
+  margin: 3px;
   padding: 10px;
   cursor: pointer;
   display: inline-flex;
@@ -115,4 +117,13 @@ html, body {
 
 .keyboard__key--spaceKey{
   width: 45%;
+}
+
+.keysShortcut, .typeOfSystem {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 15px 0;
+  display: table;
 }

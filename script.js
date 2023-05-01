@@ -569,6 +569,7 @@ function renderTextArea() {
 
 function keyboardKeyClickHandler(event) {
   event.target.classList.toggle('keyboard__key--pressed');
+  console.log(event);
 }
 
 function prepareKeyboardRow(row) {
@@ -579,14 +580,15 @@ function prepareKeyboardRow(row) {
     const keyEl = document.createElement('div');
     keyEl.classList.add('keyboard__key');
 
-    /* 
+    
     if(item.isFunctional) {
-     keyEl.classList.add('.keyboard__key--functionalKey')
+     keyEl.classList.add('keyboard__key--functionalKey')
     }
-    if(item.eventCode === 'ShiftRight' || item.eventCode === 'ShiftLeft' || item.eventCode === 'CapsLock' ||item.eventCode === 'Backspase') {
+
+   /* if(['ShiftRight', 'ShiftLeft','CapsLock','Backspase'].includes(item.eventCode)) {
        keyEl.setAttribute("flex-grow", "2")
-   } 
-    */
+   } */
+    
 
     keyEl.setAttribute('data-code', item.eventCode);
 
@@ -594,10 +596,11 @@ function prepareKeyboardRow(row) {
       keyEl.setAttribute('data-keyCode', item.keyCode);
     }
     keyEl.addEventListener('mousedown', (event) =>
-      keyboardKeyClickHandler(event)
+      keyboardKeyClickHandler(event, true)
     );
+
     keyEl.addEventListener('mouseup', (event) =>
-      keyboardKeyClickHandler(event)
+      keyboardKeyClickHandler(event, true)
     );
 
     const mainWrapper = document.createElement('span');
@@ -683,6 +686,7 @@ function handleLanguageSwitch(event) {
 }
 
 function keyEventHandler(event) {
+  
   if (event.repeat) {
     return;
   }
@@ -804,5 +808,21 @@ function renderKeyboard() {
   document.addEventListener('keyup', (event) => keyEventHandler(event));
 }
 
+function systemExplanation() {
+  const typeOfSystem = document.createElement('div');
+  typeOfSystem.className = 'typeOfSystem';
+  typeOfSystem.innerText = "Клавиатура создана в операционной системе Windows"
+  document.body.appendChild(typeOfSystem);
+}
+
+function functionalityExplanation() { 
+  const langKeysShortcut = document.createElement('div');
+  langKeysShortcut.className = 'keysShortcut';
+  langKeysShortcut.innerText = "Для переключения языка комбинация: shift + alt"
+  document.body.appendChild(langKeysShortcut);
+}
+
 renderTextArea();
 renderKeyboard();
+systemExplanation ();
+functionalityExplanation();
