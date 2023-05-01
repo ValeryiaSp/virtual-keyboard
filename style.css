@@ -30,9 +30,6 @@ html, body {
   display: block;
 }
 
-.alt .altWrapper{
-  display: block;
-}
 
 .keyboard__key .caseDown, .keyboard__key .caseUp, .keyboard__key .caps, .keyboard__key .shiftCaps {
   display: none;
@@ -54,6 +51,30 @@ html, body {
   display: block;
 }
 
+.alt .altWrapper{
+  display: block;
+}
+
+.keyboard__key .caseDownAlt, .keyboard__key .caseUpAlt, .keyboard__key .capsAlt, .keyboard__key .shiftCapsAlt {
+  display: none;
+}
+
+.keyboard:not(.caseUpAlt, .capsAlt, .shiftCapsAlt) .caseDownAlt {
+  display: block;
+}
+
+.keyboard.caseUpAlt .caseUpAlt {
+  display: block;
+}
+
+.keyboard.capsAlt .capsAlt {
+  display: block;
+}
+
+.keyboard.shiftCapsAlt .shiftCapsAlt {
+  display: block;
+}
+
 .keyboard__row {
   display: flex;
   justify-content: space-between;
@@ -64,6 +85,7 @@ html, body {
   flex-grow: 1;
   color:darkslateblue;
   font-size: 1rem;
+  font-weight: bold;
   background-color: lightblue;
   border: 1px solid darkorchid;
   border-radius: 10%;
@@ -78,7 +100,7 @@ html, body {
 .keyboard__key--pressed {
   background-color: rgb(115, 101, 202);
   color: lightblue;
-  border-radius: 50%;
+  border-radius: 30%;
   transition: all 0.3s ease-in-out;
 }
 
