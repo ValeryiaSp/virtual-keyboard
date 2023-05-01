@@ -152,7 +152,6 @@ function handleLanguageSwitch(event) {
   }
 
 
-  console.log(event)
   const targetKeyCode = event.keyCode === FIRST_LANG_SWITCH_KEY_CODE ? SECOND_LANG_SWITCH_KEY_CODE : FIRST_LANG_SWITCH_KEY_CODE;
   const targetKeyEl = document.querySelector(`div.keyboard__key--pressed[data-keyCode="${targetKeyCode}"]`)
 
@@ -163,7 +162,6 @@ function handleLanguageSwitch(event) {
 
     const keyboardEl = document.querySelector('div.keyboard');
     keyboardEl.classList.replace(currentLang, nextLang);
-    console.log('Language', currentLang, nextLang)
   }
 }
 
@@ -173,14 +171,54 @@ function keyEventHandler(event) {
   }
   
   const keyboardEl = document.querySelector('.keyboard');
-  console.log(event);
-  if(event.keyCode === 20 && event.type === 'keydown') {
-    keyboardEl.classList.toggle('caps')
-  }
+  
+    const isCaseUp = keyboardEl.classList.contains('caseUp');
+    const isCaps = keyboardEl.classList.contains('caps');
+    const isShiftCaps = keyboardEl.classList.contains('shiftCaps');
 
-  if(event.keyCode === 16) {
-    keyboardEl.classList.toggle('caseUp')
-  }
+    if(event.keyCode === 20 && event.type === 'keydown') {
+
+
+     if(isCaseUp) {
+      keyboardEl.classList.remove('caseUp');
+      keyboardEl.classList.add('shiftCaps');
+     }
+
+     if(isShiftCaps) {
+      keyboardEl.classList.remove('shiftCaps');
+      keyboardEl.classList.add('caseUp');
+     }
+
+     if(isCaps) {
+      keyboardEl.classList.remove('caps');
+     }
+
+     if(!isCaps && !isCaseUp && !isShiftCaps) {
+      keyboardEl.classList.add('caps')
+     }
+    }
+    
+    if(event.keyCode === 16) {
+      
+
+      if(isCaseUp) {
+        keyboardEl.classList.remove('caseUp');
+       }
+  
+       if(isShiftCaps) {
+        keyboardEl.classList.remove('shiftCaps');
+        keyboardEl.classList.add('caps');
+       }
+  
+       if(isCaps) {
+        keyboardEl.classList.remove('caps');
+        keyboardEl.classList.add('shiftCaps')
+      }
+  
+       if(!isCaps && !isCaseUp && !isShiftCaps) {
+        keyboardEl.classList.add('caseUp')
+       }
+    }
 
   const targetEl = document.querySelector(`div[data-code="${event.code}"]`);
   if (targetEl) {
